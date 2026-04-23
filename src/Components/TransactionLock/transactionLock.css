@@ -1,0 +1,14 @@
+.row-locked {
+    background-color: #ffe5e5 !important;
+    /* Light red */
+}
+
+.row-unlocked {
+    background-color: #e6ffe6 !important;
+    /* Light green */
+}
+
+.lock-icon {
+    cursor: pointer;
+    font-size: 18px;
+}

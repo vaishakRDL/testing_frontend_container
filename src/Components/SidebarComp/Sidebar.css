@@ -1,0 +1,82 @@
+/* Your existing styles for the sidebar */
+.sidebar {
+  width: 15vw;
+  height: 100vh;
+  background: #ffffff;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-x: hidden;
+  transition: 0s;
+  /* box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3); */
+  /* transform: perspective(3000px) rotateY(0deg); */
+}
+
+/* Add 3D effect on hover */
+/* .sidebar:hover {
+  transform: perspective(3000px) rotateY(-10deg);
+} */
+
+.sidebar.open {
+  width: 250px;
+}
+
+/* Media query for screens smaller than 768px (tablets and mobile) */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+    /* Initially hide the sidebar on small screens */
+  }
+
+  .sidebar.open {
+    display: block;
+    /* Display the sidebar when it is open on small screens */
+  }
+}
+
+
+.sidebar ul {
+  list-style: none;
+  margin-top: 50px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sidebar li {
+  padding: 6px;
+  width: 15vw;
+  /* background-color: #edebeb;  */
+  /* border-top: solid #edebeb ; */
+  /* border-bottom: solid #edebeb ; */
+  /* margin-top: 10px; */
+  border-radius: 0px;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/* .sidebar a {
+  text-decoration: none;
+  color: #edebeb;
+  transition: 0.3s;
+} */
+
+.sidebar a:hover {
+  background: #edebeb;
+  /* border-radius: 2px; */
+  width: 15vw;
+}
+
+/* .toggle-btn {
+  font-size: 20px;
+  cursor: pointer;
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 10px;
+} */

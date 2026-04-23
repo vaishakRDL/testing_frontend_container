@@ -1,0 +1,19 @@
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+.table-container {
+    max-height: 300px;
+    /* Set the maximum height for the table */
+    overflow-y: scroll;
+    /* Enable vertical scrolling */
+}
+
+#myTable thead {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    /* Set your desired background color */
+}

@@ -1,0 +1,23 @@
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Environment files
+.env
+.env.*
+*.env
+
+# Git
+.git
+.gitignore
+
+# Editor / OS
+.vscode
+.DS_Store
+
+# Docs
+README.md
+
+# Build
+build

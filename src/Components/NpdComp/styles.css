@@ -1,0 +1,20 @@
+.custom-scrollbar .MuiDataGrid-viewport {
+    overflow-y: scroll;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f50909; 
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #e90404; 
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #dd0505; 
+}

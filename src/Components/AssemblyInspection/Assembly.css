@@ -1,0 +1,53 @@
+.MuiDataGrid-cell--pinned {
+  position: sticky;
+  background-color: white;
+  z-index: 1;
+  border-right: 1px solid #969696;
+}
+
+.MuiDataGrid-columnHeader--pinned {
+  position: sticky;
+  background-color: #93bce6 !important;
+  z-index: 2;
+  border-right: 1px solid #969696;
+}
+
+/* Column Positions */
+.MuiDataGrid-cell--pinned:nth-child(1) {
+  left: 0px;
+}
+
+.MuiDataGrid-cell--pinned:nth-child(2) {
+  left: var(--first-column-width);
+}
+
+.MuiDataGrid-cell--pinned:nth-child(3) {
+  left: calc(var(--first-column-width) + var(--second-column-width));
+}
+
+.MuiDataGrid-cell--pinned:nth-child(4) {
+  left: calc(var(--first-column-width) + var(--second-column-width) + var(--third-column-width));
+}
+
+.cell-red {
+  background-color: #ff9e9e !important;
+  /* light red */
+  color: black;
+}
+
+.cell-yellow {
+  background-color: #fff59d !important;
+  /* soft yellow */
+  color: black;
+}
+
+.cell-green {
+  background-color: #9ef99e !important;
+  /* light green */
+  color: black;
+}
+
+/* Remove padding to avoid white gaps */
+.MuiDataGrid-cell {
+  padding: 0 !important;
+}

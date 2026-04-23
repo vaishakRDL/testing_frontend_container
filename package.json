@@ -1,0 +1,80 @@
+{
+  "name": "motorprotection",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "http://192.168.0.4/MallikEngineering/",
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/styles": "^4.11.5",
+    "@material/checkbox": "^14.0.0",
+    "@mui/icons-material": "^5.14.19",
+    "@mui/lab": "^5.0.0-alpha.165",
+    "@mui/material": "^5.14.19",
+    "@mui/x-data-grid": "^6.18.3",
+    "@mui/x-data-grid-generator": "^6.19.6",
+    "@mui/x-date-pickers": "^5.0.0",
+    "@mui/x-tree-view": "^6.17.0",
+    "@react-pdf-viewer/core": "^3.12.0",
+    "@react-pdf-viewer/default-layout": "^3.12.0",
+    "@react-pdf/renderer": "^3.3.8",
+    "@react-spring/web": "^9.7.3",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.6.2",
+    "bootstrap": "^5.3.2",
+    "dayjs": "^1.11.19",
+    "exceljs": "^4.4.0",
+    "file-saver": "^2.0.5",
+    "gantt-task-react": "^0.3.9",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
+    "material-ui-form": "^1.0.0-alpha.26",
+    "pdf-lib": "^1.17.1",
+    "react": "^18.2.0",
+    "react-7-segment-display": "^1.1.1",
+    "react-bootstrap": "^2.9.1",
+    "react-csv": "^2.2.2",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-redux": "^9.0.4",
+    "react-router-dom": "^6.20.1",
+    "react-scripts": "5.0.1",
+    "react-window": "^1.8.10",
+    "recharts": "^3.6.0",
+    "redux": "^5.0.0",
+    "redux-thunk": "^3.1.0",
+    "socket.io-client": "^4.8.3",
+    "styled-components": "^6.1.1",
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5",
+    "xlsx-style": "^0.8.13",
+    "zustand": "^5.0.9"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

@@ -1,0 +1,121 @@
+/* Ensure full-width container */
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  width: 100vw; /* Full viewport width */
+}
+
+/* Make table stretch full width */
+.styled-table, 
+.footer-table {
+  width: 100vw; /* Full viewport width */
+  max-width: 100%; /* Ensure it doesn't overflow */
+  border-collapse: collapse;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  padding:10px;
+  height: '100%'
+}
+
+/* Ensure table cells take full width */
+.styled-table th,
+.styled-table td,
+.footer-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #969696;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+}
+
+/* Make text wrap when needed for small screens */
+@media screen and (max-width: 768px) {
+  .styled-table th,
+  .styled-table td,
+  .footer-table td {
+    white-space: normal; /* Allow wrapping on small screens */
+    font-size: 14px; /* Reduce font size */
+    padding: 8px;
+  }
+}
+
+/* Table header styling */
+.styled-table thead {
+  background-color: #93bce6;
+  color: #1c1919;
+  font-weight: bold;
+}
+
+/* Row colors */
+.even-row, .footer-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.odd-row, .footer-table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* Footer styling */
+.footer-table {
+  /* margin-top: 10px; */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Sticky footer */
+.footer-table-container {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.green-row {
+  background-color: #56ed79; /* light green */
+}
+
+.yellow-row {
+  background-color: #e3ee6a; /* light yellow */
+}
+
+.orange-row {
+  background-color: #f5b133; /* light orange */
+}
+
+.large-checkbox {
+  width: 13px;  /* Change the size as needed */
+  height: 13px;
+  transform: scale(1.5);  /* Another way to scale */
+}
+
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.table-container table {
+  border-collapse: collapse;
+  width: max-content; /* Allows the table to grow wider than container */
+  min-width: 100%;
+}
+
+.table-container td {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  white-space: nowrap; /* Prevents wrapping */
+}
+
+

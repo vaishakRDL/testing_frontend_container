@@ -1,0 +1,207 @@
+
+import React, { useState, useEffect } from 'react';
+import EditIcon from '@mui/icons-material/Edit';
+import { Button, Card, CardContent, Tooltip } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
+import NotificationBar from '../GlobleFiles/ServiceNotificationBar';
+import { DescriptionMasterShowData, ReworkManHourShowData } from '../../ApiService/LoginPageService';
+import ApplicationStore from '../../Utility/localStorageUtil';
+
+import DescriptionToolbar from './DescriptionToolbar';
+import DescriptionModule from './DescriptionModule';
+import { useModuleLocks } from '../context/ModuleLockContext';
+
+const DescriptionResult = () => {
+    const moduleLocks = useModuleLocks();
+    const isModuleLocked =
+        moduleLocks.find(m => m.moduleName === "COPQ")?.lockStatus === "locked";
+
+    const [rows, setRows] = useState([]);
+    const [isAddButton, setIsAddButton] = useState(true);
+    const [editDescription, setEditDescription] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [refreshData, setRefreshData] = useState(false);
+    const [isLoading, setGridLoading] = useState(true);
+    const [deleteDailogOpen, setDeleteDailogOpen] = useState(false);
+    const [deleteId, setDeleteId] = useState('');
+    const [openNotification, setNotification] = useState({
+        status: false,
+        type: 'error',
+        message: '',
+    });
+
+    const { userDetails } = ApplicationStore().getStorage('userDetails');
+    const userPermission = userDetails?.groupRights?.filter((data) => data?.menu?.toLowerCase() === "instrumentlist");
+
+    useEffect(() => {
+        DescriptionMasterShowData(handleReworkManHourShow, handeReworkManHourException);
+    }, [refreshData]);
+
+    const handleReworkManHourShow = (dataObject) => {
+        setGridLoading(false);
+        setRows(dataObject?.data || []);
+    }
+
+    const handeReworkManHourException = (errorStatus, errorMessage) => {
+        console.log(errorMessage);
+    }
+
+    const generateRowsWithIndex = (rows) => {
+        return rows.map((row, index) => ({ sNo: index + 1, ...row }));
+    };
+
+    const rowData = generateRowsWithIndex(rows);
+
+
+    const columns = [
+        {
+            field: 'sNo',
+            headerClassName: 'super-app-theme--header',
+            headerName: (
+                <span style={{ fontWeight: 'bold', fontSize: '16px' }}>
+                    Sl No
+                </span>
+            ),
+            sortable: false,
+            minWidth: 80,
+            flex: 1,
+            align: 'center',
+            headerAlign: 'center',
+
+        },
+
+        {
+            field: 'description',
+            headerClassName: 'super-app-theme--header',
+            headerName: (
+                <span style={{ fontWeight: "bold", fontSize: "16px" }}>
+                    Description
+                </span>
+            ),
+            type: 'string',
+            sortable: true,
+            minWidth: 80,
+            flex: 1,
+            align: 'center',
+            headerAlign: 'center',
+        },
+
+        {
+            field: 'actions',
+            headerClassName: 'super-app-theme--header',
+            type: 'actions',
+            flex: 1,
+            headerName: 'Actions',
+            cellClassName: 'actions',
+            disableClickEventBubbling: true,
+            getActions: (params) => [
+                <EditData selectedRow={params.row} />,
+            ],
+        },
+    ];
+
+
+
+    function EditData(props) {
+        return (
+            <Tooltip title="Edit">
+                <EditIcon
+                    style={{ color: userPermission[0]?.updateData === 0 || isModuleLocked ? 'gray' : '#000000' }}
+                    onClick={(event) => {
+                        if (userPermission[0]?.updateData === 1 && !isModuleLocked) {
+                            event.stopPropagation();
+                            setIsAddButton(false);
+                            setEditDescription(props.selectedRow);
+                            setOpen(true);
+                        }
+                    }}
+                />
+            </Tooltip>
+        );
+    }
+
+    const handleClose = () => {
+        setNotification({
+            status: false,
+            type: '',
+            message: '',
+        });
+    };
+
+    return (
+        <div style={{ height: '60vh', width: '100%' }}>
+            <DescriptionToolbar
+                setIsAddButton={setIsAddButton}
+                setEditDescription={setEditDescription}
+                setOpen={setOpen}
+            />
+            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                <Card style={{ boxShadow: '0 10px 10px 2px rgba(0, 0, 0, 0.2)', marginTop: '-10px', borderRadius: '10px', width: '98%', height: '100%' }}>
+                    <CardContent>
+                        <DataGrid
+                            rows={rowData}
+                            columns={columns}
+                            pageSize={8}
+                            loading={isLoading}
+                            rowsPerPageOptions={[8]}
+                            disableSelectionOnClick
+                            style={{ border: 'none', }}
+                            sx={{
+                                overflow: 'auto',
+                                height: '58vh',
+                                // minHeight: '500px',
+                                width: '100%',
+                                '& .super-app-theme--header': {
+                                    WebkitTextStrokeWidth: '0.6px',
+                                    backgroundColor: '#93bce6',
+                                    color: '#1c1919'
+
+                                },
+                                '& .MuiDataGrid-cell': {
+                                    border: '1px solid #969696',
+                                },
+                                '& .MuiDataGrid-columnHeader': {
+                                    border: '1px solid #969696', // Add border to column headers
+                                },
+                            }}
+                            getRowClassName={(params) => {
+                                // Find the index of the row within the rows array
+                                const rowIndex = rowData.findIndex(row => row.id === params.row.id);
+                                // Check if the index is valid
+                                if (rowIndex !== -1) {
+                                    console.log(' ');
+                                    return rowIndex % 2 === 0 ? 'Mui-evenRow' : 'Mui-oddRow';
+                                }
+                                return ''; // Return default class if index is not found
+                            }}
+
+                            rowHeight={40}
+                            columnHeaderHeight={40}
+                        />
+                    </CardContent>
+                </Card>
+
+            </div>
+            <DescriptionModule
+                isAddButton={isAddButton}
+                editDescription={editDescription}
+                open={open}
+                setOpen={setOpen}
+                setRefreshData={setRefreshData}
+                handleClose={handleClose}
+                openNotification={openNotification}
+                setNotification={setNotification}
+            />
+            <NotificationBar
+                handleClose={handleClose}
+                notificationContent={openNotification.message}
+                openNotification={openNotification.status}
+                type={openNotification.type}
+            />
+
+        </div>
+    )
+}
+
+export default DescriptionResult
+
