@@ -34,7 +34,9 @@ jobs:
             echo "ERROR: DOCKER_USERNAME secret is not set!"
             exit 1
           fi
-          DOCKER_IMAGE=${{ secrets.DOCKER_USERNAME }}/rdl-fe
+          # Lowercase the username for the Docker image name
+          DOCKER_USER=$(echo "${{ secrets.DOCKER_USERNAME }}" | tr '[:upper:]' '[:lower:]')
+          DOCKER_IMAGE=${DOCKER_USER}/rdl-fe
           VERSION=latest
           if [[ $GITHUB_REF == refs/heads/main ]]; then
             VERSION=latest
