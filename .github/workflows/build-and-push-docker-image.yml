@@ -30,6 +30,10 @@ jobs:
       - name: Prepare tags
         id: prep
         run: |
+          if [ -z "${{ secrets.DOCKER_USERNAME }}" ]; then
+            echo "ERROR: DOCKER_USERNAME secret is not set!"
+            exit 1
+          fi
           DOCKER_IMAGE=${{ secrets.DOCKER_USERNAME }}/rdl-fe
           VERSION=latest
           if [[ $GITHUB_REF == refs/heads/main ]]; then
@@ -40,6 +44,7 @@ jobs:
           TAGS="${DOCKER_IMAGE}:${VERSION},${DOCKER_IMAGE}:${GITHUB_SHA::7}"
           echo "tags=${TAGS}" >> $GITHUB_OUTPUT
           echo "image=${DOCKER_IMAGE}" >> $GITHUB_OUTPUT
+          echo "Tags generated: ${TAGS}"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
