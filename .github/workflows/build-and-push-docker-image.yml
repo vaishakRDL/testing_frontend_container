@@ -34,9 +34,7 @@ jobs:
           images: |
             ${{ secrets.DOCKER_USERNAME }}/rdl-fe
           tags: |
-            type=ref,event=branch
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
+            type=ref,event=branch,enable=true
             type=sha,prefix={{branch}}-
             type=raw,value=latest,enable={{is_default_branch}}
 
