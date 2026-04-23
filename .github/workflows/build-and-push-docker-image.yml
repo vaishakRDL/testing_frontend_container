@@ -24,18 +24,15 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: developer5@rdltech.in
+          password: Ce=UmdQ7KFmV7nZ%%
 
       - name: Prepare tags
         id: prep
         run: |
-          if [ -z "${{ secrets.DOCKER_USERNAME }}" ]; then
-            echo "ERROR: DOCKER_USERNAME secret is not set!"
-            exit 1
-          fi
-          # Lowercase the username for the Docker image name
-          DOCKER_USER=$(echo "${{ secrets.DOCKER_USERNAME }}" | tr '[:upper:]' '[:lower:]')
+          # Use a sanitized version of the username for the Docker image name
+          # (Docker Hub usernames cannot contain @ or dots)
+          DOCKER_USER="developer5" 
           DOCKER_IMAGE=${DOCKER_USER}/rdl-fe
           VERSION=latest
           if [[ $GITHUB_REF == refs/heads/main ]]; then
