@@ -27,23 +27,25 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Extract metadata
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: |
-            ${{ secrets.DOCKER_USERNAME }}/rdl-fe
-          tags: |
-            type=ref,event=branch,enable=true
-            type=sha,prefix={{branch}}-
-            type=raw,value=latest,enable={{is_default_branch}}
+      - name: Prepare tags
+        id: prep
+        run: |
+          DOCKER_IMAGE=${{ secrets.DOCKER_USERNAME }}/rdl-fe
+          VERSION=latest
+          if [[ $GITHUB_REF == refs/heads/main ]]; then
+            VERSION=latest
+          elif [[ $GITHUB_REF == refs/heads/develop ]]; then
+            VERSION=develop
+          fi
+          TAGS="${DOCKER_IMAGE}:${VERSION},${DOCKER_IMAGE}:${GITHUB_SHA::7}"
+          echo "tags=${TAGS}" >> $GITHUB_OUTPUT
+          echo "image=${DOCKER_IMAGE}" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.prep.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
